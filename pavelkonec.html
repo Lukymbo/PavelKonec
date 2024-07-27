@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+ <html>
+     <head>
+	 
+         <title> Odpočet globální radosti  </title>   	 
+         <meta http-equiv="content-type" content="text/html;charset=utf-8">
+		 
+		 
+
+         <style>    
+            body{display: flex;
+                justify-content: center;}
+            #HodinyDIV{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-width: 60vw;
+                min-height: 30vh;
+                background-color: rgb(206, 169, 21);
+                gap: 4vh;
+            }
+            .Textik{
+                font-weight: bold;
+                font-size: 5vh;
+                margin: 0;
+                padding: 0;
+            }
+            #MensiDIV{
+                
+                width: 80%;
+                display: flex;
+                flex-direction: row;
+                gap: 1vw;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            #MensiDIV > div{
+                background-color: cadetblue;
+                border-style: solid;
+                border-width: 4px;
+                width: 10vw;
+                height: 10vh;
+                text-align: center;
+                font-size: 5vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+
+	     </style>
+     </head>
+     <body>
+
+        <div id="HodinyDIV">
+            <p class="Textik">Pavel Mifka skončí za</p>
+            <div id="MensiDIV">
+                <div id="Dny"></div>
+                <div id="Hodiny"></div>
+                <div id="Minuty"></div>
+                <div id="Sekundy"></div>
+                <div id="Setiny"></div>
+            </div>
+
+        </div>
+	 
+	     <script type="text/javascript">
+
+            let divcas = document.getElementById("HodinyDIV");
+           window.setInterval(pocitej, 500);
+
+            let dnyid = document.getElementById("Dny");
+            let hodinyid = document.getElementById("Hodiny");
+            let minutyid = document.getElementById("Minuty");
+            let sekundyid = document.getElementById("Sekundy");
+            let setinyid = document.getElementById("Setiny");
+
+            function pocitej(){
+                let koneccas = new Date(2024,8,13).getTime();
+
+                let casted = new Date().getTime();
+
+                let rozdil = koneccas - casted;
+                    //console.log(rozdil);
+                
+                let dny1 = rozdil % (1000 * 60 * 60 * 24);
+                let hodiny1 = dny1 % (1000 * 60 * 60);
+                let minuty1 = hodiny1 % (1000 * 60);
+                let sekundy1 = minuty1 % (1000);
+
+                setinyid.innerHTML = sekundy1;
+                sekundyid.innerHTML = ((minuty1 - sekundy1) / 1000) + "s";
+                minutyid.innerHTML = ((hodiny1 - minuty1) / (1000 * 60)) + "m";
+                hodinyid.innerHTML = ((dny1 - hodiny1)/ (1000 * 60 * 60)) + "h";
+                dnyid.innerHTML = ((rozdil - dny1)/ (1000* 60*60*24)) + "d";
+            }
+
+            
+		 </script>
+     </body>
+</html>	 

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+ <html>
+     <head>
+	 
+         <title> Odpočet globální radosti  </title>   	 
+         <meta http-equiv="content-type" content="text/html;charset=utf-8">
+		 
+		 
+
+         <style>    
+            body{display: flex;
+                justify-content: center;
+            flex-direction: column;}
+            #HodinyDIV{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                min-width: 60vw;
+                min-height: 30vh;
+                background-color: rgb(206, 169, 21);
+                gap: 4vh;
+            }
+            .Textik{
+                font-weight: bold;
+                font-size: 5vh;
+                margin: 0;
+                padding: 1vw;
+                text-align: center;
+            }
+            #MensiDIV{
+                
+                width: 80%;
+                display: flex;
+                flex-direction: row;
+                gap: 1vw;
+                justify-content: space-evenly;
+                align-items: center;
+            }
+            #MensiDIV > div{
+                background-color: cadetblue;
+                border-style: solid;
+                border-width: 4px;
+                width: 10vw;
+                height: 10vh;
+                text-align: center;
+                font-size: 5vw;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+            }
+            #PavelDIV{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 30vh;
+                flex-direction: column;
+            }
+            #Pavel{
+                width: 20vw;
+            }
+            #tlac{
+                background-color: 0;
+                border-style: dashed;
+                min-width: 15vw;
+                min-height: 5vh;
+                font-size: 2vh;
+                font-weight: bold;
+            }
+            #tlac:hover{
+                min-width: 17vw;
+                min-height: 7vh;
+                transition-duration: 1s;
+            }
+            #tlac:not(:hover){
+                transition-duration: 1s;
+            }
+
+	     </style>
+     </head>
+     <body>
+
+        <div id="HodinyDIV">
+            <p class="Textik">Pavel Mifka skončí za</p>
+            <div id="MensiDIV">
+                <div id="Dny"></div>
+                <div id="Hodiny"></div>
+                <div id="Minuty"></div>
+                <div id="Sekundy"></div>
+                <div id="Setiny"></div>
+            </div>
+        </div>
+            <div id="PavelDIV">
+                <img id="Pavel" src="pavel2.png">
+                <input type="button" value="Chci se pobavit" id="tlac" onclick="vtip()">
+            </div>
+
+            <audio id="zvuk1"> <source src="pavel1.mp3" type="audio/mp3"> </audio>
+            <audio id="zvuk2"> <source src="pavel2.mp3" type="audio/mp3"> </audio>
+            <audio id="zvuk3"> <source src="pavel3.mp3" type="audio/mp3"> </audio>
+            <audio id="zvuk4"> <source src="pavel4.mp3" type="audio/mp3"> </audio>
+            <audio id="zvuk5"> <source src="pavel5.mp3" type="audio/mp3"> </audio>
+            <audio id="zvuk6"> <source src="pavel6.mp3" type="audio/mp3"> </audio>
+
+        
+	 
+	     <script type="text/javascript">
+
+            let divcas = document.getElementById("HodinyDIV");
+           window.setInterval(pocitej, 50);
+
+            let dnyid = document.getElementById("Dny");
+            let hodinyid = document.getElementById("Hodiny");
+            let minutyid = document.getElementById("Minuty");
+            let sekundyid = document.getElementById("Sekundy");
+            let setinyid = document.getElementById("Setiny");
+
+            function pocitej(){
+                let koneccas = new Date(2024,8,13).getTime();
+
+                let casted = new Date().getTime();
+
+                let rozdil = koneccas - casted;
+                    //console.log(rozdil);
+                
+                let dny1 = rozdil % (1000 * 60 * 60 * 24);
+                let hodiny1 = dny1 % (1000 * 60 * 60);
+                let minuty1 = hodiny1 % (1000 * 60);
+                let sekundy1 = minuty1 % (1000);
+
+                setinyid.innerHTML = sekundy1;
+                sekundyid.innerHTML = ((minuty1 - sekundy1) / 1000) + "s";
+                minutyid.innerHTML = ((hodiny1 - minuty1) / (1000 * 60)) + "m";
+                hodinyid.innerHTML = ((dny1 - hodiny1)/ (1000 * 60 * 60)) + "h";
+                dnyid.innerHTML = ((rozdil - dny1)/ (1000* 60*60*24)) + "d";
+            }
+
+            function vtip(){
+
+                let nahodnecislo = nahodny(0,5) + 1;
+                console.log(nahodnecislo);
+
+                let neco = "zvuk" + nahodnecislo;
+                document.getElementById(neco).play();
+
+            }
+
+            function nahodny(minimalni, maximalni){
+
+                var Prumer = Math.round (Math.random() * (maximalni - minimalni) + minimalni) + (minimalni * 1);
+                return Prumer;
+
+            }
+            
+		 </script>
+     </body>
+</html>	 
